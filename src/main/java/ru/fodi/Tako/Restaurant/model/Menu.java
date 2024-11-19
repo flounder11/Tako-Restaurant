@@ -13,4 +13,8 @@ public class Menu {
     private long idMenu;
     @Column(name = "description_menu")
     private String descriptionMenu;
+
+    @ManyToOne
+    @JoinColumn(name = "id_product")
+    private Product product;
 }

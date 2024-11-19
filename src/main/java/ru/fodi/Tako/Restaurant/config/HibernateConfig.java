@@ -15,14 +15,26 @@ import java.util.Properties;
 @Configuration
 @EnableTransactionManagement
 public class HibernateConfig {
+
     @Autowired
     private DataSource dataSource;
 
-    private Properties hibernateProperties(){
+    /**
+     * @Bean
+     *       public LocalSessionFactoryBean sessionFactory() {
+     *       LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
+     *       sessionFactory.setDataSource(dataSource);
+     *       sessionFactory.setPackagesToScan("com.zoo.zoo_spring.models");
+     *       sessionFactory.setHibernateProperties(hibernateProperties());
+     *       return sessionFactory;
+     *       }
+     **/
+
+    private Properties hibernateProperties() {
         Properties properties = new Properties();
-        properties.put("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
+        properties.put("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect"); //change to your db driver if you need
+        properties.put("hibernate.hbm2ddl.auto", "create-drop");
         properties.put("hibernate.show_sql", "true");
-        properties.put("hibernate.hbm2ddl.auto", "update");
         return properties;
     }
 
@@ -38,10 +50,9 @@ public class HibernateConfig {
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource(dataSource);
-        em.setPackagesToScan("ru.fodi.Tako.Restaurant");
+        em.setPackagesToScan("ru.fodi.Tako.Restaurant.model");
         em.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
         em.setJpaProperties(hibernateProperties());
         return em;
     }
-
 }

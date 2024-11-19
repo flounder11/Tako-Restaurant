@@ -13,4 +13,12 @@ public class Order {
     private long idOrder;
     @Column(name = "data")
     private String data;
+
+    @ManyToOne
+    @JoinColumn(name = "id_client")
+    private Client client;
+
+    @ManyToOne
+    @JoinColumn(name = "id_product")
+    private Product product;
 }

@@ -19,9 +19,6 @@ public class Product {
     private String descriptionProduct;
 
     @ManyToOne
-    @JoinColumn(name = "id_menu")
-    private Menu menu;
-    @ManyToOne
-    @JoinColumn(name = "id_order")
-    private Order order;
+    @JoinColumn(name = "id_additive")
+    private Additive additive;
 }

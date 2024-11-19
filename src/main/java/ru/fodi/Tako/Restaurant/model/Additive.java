@@ -15,8 +15,4 @@ public class Additive {
     private String nameAdditive;
     @Column(name = "price_additive")
     private double priceAdditive;
-
-    @ManyToOne
-    @JoinColumn(name = "id_product")
-    private Product product;
 }

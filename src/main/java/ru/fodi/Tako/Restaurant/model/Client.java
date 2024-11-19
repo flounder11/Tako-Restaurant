@@ -17,8 +17,4 @@ public class Client {
     private String phoneClient;
     @Column(name = "email_client")
     private String emailClient;
-
-    @ManyToOne
-    @JoinColumn(name = "id_order")
-    private Order order;
 }

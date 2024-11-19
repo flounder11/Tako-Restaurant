@@ -10,14 +10,12 @@ import org.springframework.context.annotation.ComponentScan;
 
 
 @SpringBootApplication
-@EntityScan(basePackages = { "ru.fodi.Tako.Restaurant.model" })
-@ComponentScan(basePackages = {"ru.fodi.Tako.Restaurant.dal"})
-
+//@EntityScan(basePackages = { "ru.fodi.Tako.Restaurant.model" })
+//@ComponentScan(basePackages = {"ru.fodi.Tako.Restaurant.dal"})
 public class TakoRestaurantApplication {
-	public static ApplicationContext context;
+//	public static ApplicationContext context;
 
 	public static void main(String[] args) {
 		SpringApplication.run(TakoRestaurantApplication.class, args);
-
-
-	}}
+	}
+}
