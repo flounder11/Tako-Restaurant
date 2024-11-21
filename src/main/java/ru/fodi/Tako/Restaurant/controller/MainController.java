@@ -68,23 +68,24 @@ public class MainController {
         return ResponseEntity.ok("Menu deleted");
     }
 
-    @DeleteMapping("/delete/menu/{id}")
+    @DeleteMapping("/delete/order/{id}")
     public ResponseEntity<String> deleteOrderById(@PathVariable("id") long id) {
         dataAccessLayer.deleteOrderById(id);
         return ResponseEntity.ok("Order deleted");
     }
 
-    @DeleteMapping("/delete/order/{id}")
+    @DeleteMapping("/delete/product/{id}")
     public ResponseEntity<String> deleteProductById(@PathVariable("id") long id) {
         dataAccessLayer.deleteProductById(id);
         return ResponseEntity.ok("Product deleted");
     }
 
-    @DeleteMapping("/delete/product/{id}")
-    public ResponseEntity<String> deletePublicById(@PathVariable("id") long id) {
-        dataAccessLayer.deleteProductById(id);
-        return ResponseEntity.ok("Product deleted");
-    }
 
 //    Get
+
+    @GetMapping("/get/client/{id}")
+    public ResponseEntity<String> getClientById(@PathVariable("id") long id) {
+        dataAccessLayer.getClientById(id);
+        return ResponseEntity.ok("Client retrieved");
+    }
 }

@@ -16,6 +16,8 @@ public class DataAccessLayer {
 
     Session session = null;
 
+//    Post
+
     public void createClient(Client newClient) {
         session = sessionFactory.openSession();
         session.beginTransaction();
@@ -117,6 +119,19 @@ public class DataAccessLayer {
         session.beginTransaction();
         Product product = session.get(Product.class, id);
         session.remove(product);
+        session.getTransaction().commit();
+        if (session != null) {
+            session.close();
+        }
+    }
+
+//    Get
+
+    public void getClientById(long id){
+        session = sessionFactory.openSession();
+        session.beginTransaction();
+        Client client = session.get(Client.class, id);
+        session.persist(client);
         session.getTransaction().commit();
         if (session != null) {
             session.close();
