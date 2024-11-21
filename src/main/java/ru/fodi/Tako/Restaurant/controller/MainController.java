@@ -131,4 +131,16 @@ public class MainController {
             return ResponseEntity.ok(order);
         }
     }
+
+//    Patch
+
+    @PatchMapping("/patch/client/{id}")
+    public ResponseEntity<Client> patchClientById(@PathVariable("id") long id, @RequestBody Client client){
+        Client updatedClient = dataAccessLayer.patchClientById(id, client);
+        if (client == null) {
+            return ResponseEntity.notFound().build();
+        } else{
+            return ResponseEntity.ok(client);
+        }
+    }
 }

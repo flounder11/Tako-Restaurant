@@ -192,4 +192,26 @@ public class DataAccessLayer {
         }
     }
 
+//    Patch
+
+    public Client patchClientById(long id, Client client){
+        session = sessionFactory.openSession();
+        session.beginTransaction();
+        try {
+            Client updatedClient = session.get(Client.class, id);
+
+            updatedClient.setNameClient(client.getNameClient());
+            updatedClient.setPhoneClient(client.getPhoneClient());
+            updatedClient.setPhoneClient(client.getPhoneClient());
+            updatedClient.setEmailClient(client.getEmailClient());
+
+            session.merge(updatedClient);
+            session.getTransaction().commit();
+            return updatedClient;
+        } finally {
+            if (session != null){
+                session.close();
+            }
+        }
+    }
 }
