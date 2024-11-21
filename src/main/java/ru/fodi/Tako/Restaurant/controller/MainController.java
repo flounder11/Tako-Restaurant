@@ -80,12 +80,15 @@ public class MainController {
         return ResponseEntity.ok("Product deleted");
     }
 
-
 //    Get
 
     @GetMapping("/get/client/{id}")
-    public ResponseEntity<String> getClientById(@PathVariable("id") long id) {
-        dataAccessLayer.getClientById(id);
-        return ResponseEntity.ok("Client retrieved");
+    public ResponseEntity<Client> getClientById(@PathVariable("id") long id){
+        Client client = dataAccessLayer.getClientById(id);
+        if (client == null) {
+            return ResponseEntity.notFound().build();
+        } else{
+            return ResponseEntity.ok(client);
+        }
     }
 }

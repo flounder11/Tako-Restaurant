@@ -127,14 +127,16 @@ public class DataAccessLayer {
 
 //    Get
 
-    public void getClientById(long id){
+    public Client getClientById(long id){
         session = sessionFactory.openSession();
         session.beginTransaction();
-        Client client = session.get(Client.class, id);
-        session.persist(client);
-        session.getTransaction().commit();
-        if (session != null) {
-            session.close();
+        try{
+            Client client = session.get(Client.class, id);
+            return client;
+        } finally {
+            if (session != null) {
+                session.close();
+            }
         }
     }
 }
