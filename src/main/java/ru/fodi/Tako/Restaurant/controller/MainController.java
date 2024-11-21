@@ -91,4 +91,44 @@ public class MainController {
             return ResponseEntity.ok(client);
         }
     }
+
+    @GetMapping("/get/additive/{id}")
+    public ResponseEntity<Additive> getAdditiveById(@PathVariable("id") long id){
+        Additive additive = dataAccessLayer.getAdditiveById(id);
+        if (additive == null) {
+            return ResponseEntity.notFound().build();
+        } else{
+            return ResponseEntity.ok(additive);
+        }
+    }
+
+    @GetMapping("/get/menu/{id}")
+    public ResponseEntity<Menu> getMenuById(@PathVariable("id") long id){
+        Menu menu = dataAccessLayer.getMenuById(id);
+        if (menu == null) {
+            return ResponseEntity.notFound().build();
+        } else{
+            return ResponseEntity.ok(menu);
+        }
+    }
+
+    @GetMapping("/get/product/{id}")
+    public ResponseEntity<Product> getProductById(@PathVariable("id") long id){
+        Product product = dataAccessLayer.getProductById(id);
+        if (product == null) {
+            return ResponseEntity.notFound().build();
+        } else{
+            return ResponseEntity.ok(product);
+        }
+    }
+
+    @GetMapping("/get/order/{id}")
+    public ResponseEntity<Order> getOrderById(@PathVariable("id") long id){
+        Order order = dataAccessLayer.getOrderById(id);
+        if (order == null) {
+            return ResponseEntity.notFound().build();
+        } else{
+            return ResponseEntity.ok(order);
+        }
+    }
 }

@@ -139,4 +139,57 @@ public class DataAccessLayer {
             }
         }
     }
+
+    public Additive getAdditiveById(long id){
+        session = sessionFactory.openSession();
+        session.beginTransaction();
+        try{
+            Additive additive = session.get(Additive.class, id);
+            return additive;
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+    }
+
+    public Menu getMenuById(long id){
+        session = sessionFactory.openSession();
+        session.beginTransaction();
+        try{
+            Menu menu = session.get(Menu.class, id);
+            return menu;
+        } finally {
+            if (session != null){
+                session.close();
+            }
+        }
+    }
+
+    public Order getOrderById(long id){
+        session = sessionFactory.openSession();
+        session.beginTransaction();
+        try{
+            Order order = session.get(Order.class, id);
+            return order;
+        } finally {
+            if (session != null){
+                session.close();
+            }
+        }
+    }
+
+    public Product getProductById(long id){
+        session = sessionFactory.openSession();
+        session.beginTransaction();
+        try{
+            Product product = session.get(Product.class, id);
+            return product;
+        } finally {
+            if (session != null){
+                session.close();
+            }
+        }
+    }
+
 }
