@@ -2,13 +2,14 @@ package ru.fodi.Tako.Restaurant.dal;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.fodi.Tako.Restaurant.model.*;
 
 @Component
 public class DataAccessLayer {
     private final SessionFactory sessionFactory;
-
+    @Autowired
     public DataAccessLayer(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
@@ -59,6 +60,63 @@ public class DataAccessLayer {
         session = sessionFactory.openSession();
         session.beginTransaction();
         session.persist(newProduct);
+        session.getTransaction().commit();
+        if (session != null) {
+            session.close();
+        }
+    }
+
+//    Delete
+
+    public void deleteClientById(long id){
+        session = sessionFactory.openSession();
+        session.beginTransaction();
+        Client client = session.get(Client.class, id);
+        session.remove(client);
+        session.getTransaction().commit();
+        if (session != null) {
+            session.close();
+        }
+    }
+
+    public void deleteAdditiveById(long id){
+        session = sessionFactory.openSession();
+        session.beginTransaction();
+        Additive additive = session.get(Additive.class, id);
+        session.remove(additive);
+        session.getTransaction().commit();
+        if (session != null) {
+            session.close();
+        }
+    }
+
+    public void deleteMenuById(long id){
+        session = sessionFactory.openSession();
+        session.beginTransaction();
+        Menu menu = session.get(Menu.class, id);
+        session.remove(menu);
+        session.getTransaction().commit();
+        if (session != null) {
+            session.close();
+        }
+    }
+
+    public void deleteOrderById(long id){
+        session = sessionFactory.openSession();
+        session.beginTransaction();
+        Order order = session.get(Order.class, id);
+        session.remove(order);
+        session.getTransaction().commit();
+        if (session != null) {
+            session.close();
+        }
+    }
+
+    public void deleteProductById(long id){
+        session = sessionFactory.openSession();
+        session.beginTransaction();
+        Product product = session.get(Product.class, id);
+        session.remove(product);
         session.getTransaction().commit();
         if (session != null) {
             session.close();
