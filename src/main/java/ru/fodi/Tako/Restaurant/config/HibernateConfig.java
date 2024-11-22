@@ -19,25 +19,6 @@ public class HibernateConfig {
     @Autowired
     private DataSource dataSource;
 
-    /**
-     * @Bean
-     *       public LocalSessionFactoryBean sessionFactory() {
-     *       LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
-     *       sessionFactory.setDataSource(dataSource);
-     *       sessionFactory.setPackagesToScan("com.zoo.zoo_spring.models");
-     *       sessionFactory.setHibernateProperties(hibernateProperties());
-     *       return sessionFactory;
-     *       }
-     **/
-
-    private Properties hibernateProperties() {
-        Properties properties = new Properties();
-        properties.put("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect"); //change to your db driver if you need
-        properties.put("hibernate.hbm2ddl.auto", "create-drop");
-        properties.put("hibernate.show_sql", "true");
-        return properties;
-    }
-
     @Bean
     @Autowired
     public HibernateTransactionManager transactionManager(SessionFactory sessionFactory) {
@@ -52,7 +33,6 @@ public class HibernateConfig {
         em.setDataSource(dataSource);
         em.setPackagesToScan("ru.fodi.Tako.Restaurant.model");
         em.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
-        em.setJpaProperties(hibernateProperties());
         return em;
     }
 }

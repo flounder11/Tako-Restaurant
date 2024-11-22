@@ -135,12 +135,32 @@ public class MainController {
 //    Patch
 
     @PatchMapping("/patch/client/{id}")
-    public ResponseEntity<Client> patchClientById(@PathVariable("id") long id, @RequestBody Client client){
-        Client updatedClient = dataAccessLayer.patchClientById(id, client);
-        if (client == null) {
-            return ResponseEntity.notFound().build();
-        } else{
-            return ResponseEntity.ok(client);
-        }
+    public ResponseEntity<String> patchClientById(@PathVariable("id") long id, @RequestBody Client updateClient){
+        dataAccessLayer.updateClient(id, updateClient);
+        return ResponseEntity.ok("Update client");
+    }
+
+    @PatchMapping("/patch/additive/{id}")
+    public ResponseEntity<String> patchAdditiveById(@PathVariable("id") long id, @RequestBody Additive updateAdditive){
+        dataAccessLayer.updateAdditive(id, updateAdditive);
+        return ResponseEntity.ok("Update additive");
+    }
+
+    @PatchMapping("/patch/menu/{id}")
+    public ResponseEntity<String> patchMenuById(@PathVariable("id") long id, @RequestBody Menu updateMenu){
+        dataAccessLayer.updateMenu(id, updateMenu);
+        return ResponseEntity.ok("Update menu");
+    }
+
+    @PatchMapping("/patch/order/{id}")
+    public ResponseEntity<String> patchOrderById(@PathVariable("id") long id, @RequestBody Order updateOrder){
+        dataAccessLayer.updateOrder(id, updateOrder);
+        return ResponseEntity.ok("Update order");
+    }
+
+    @PatchMapping("/patch/product/{id}")
+    public ResponseEntity<String> patchProductById(@PathVariable("id") long id, @RequestBody Product updateProduct){
+        dataAccessLayer.updateProduct(id, updateProduct);
+        return ResponseEntity.ok("Update product");
     }
 }

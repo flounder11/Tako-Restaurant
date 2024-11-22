@@ -194,24 +194,77 @@ public class DataAccessLayer {
 
 //    Patch
 
-    public Client patchClientById(long id, Client client){
+//    public Client patchClientById(long id, Client updatedClient){
+//        session = sessionFactory.openSession();
+//        session.beginTransaction();
+//        try {
+//            Client client = session.get(Client.class, id);
+//
+//            client.setNameClient(updatedClient.getNameClient());
+//            client.setPhoneClient(updatedClient.getPhoneClient());
+//            client.setEmailClient(updatedClient.getEmailClient());
+//
+//            session.merge(client);
+//            session.getTransaction().commit();
+//            return client;
+//        } finally {
+//            if (session != null){
+//                session.close();
+//            }
+//        }
+//    }
+
+    public void updateClient(long id, Client updatedClient) {
         session = sessionFactory.openSession();
         session.beginTransaction();
-        try {
-            Client updatedClient = session.get(Client.class, id);
+        Client client = session.get(Client.class, id);
+        client.setNameClient(updatedClient.getNameClient());
+        client.setPhoneClient(updatedClient.getPhoneClient());
+        client.setEmailClient(updatedClient.getEmailClient());
+        session.merge(client);
+        session.getTransaction().commit();
+    }
 
-            updatedClient.setNameClient(client.getNameClient());
-            updatedClient.setPhoneClient(client.getPhoneClient());
-            updatedClient.setPhoneClient(client.getPhoneClient());
-            updatedClient.setEmailClient(client.getEmailClient());
+    public void updateAdditive(long id, Additive updatedAdditive) {
+        session = sessionFactory.openSession();
+        session.beginTransaction();
+        Additive additive = session.get(Additive.class, id);
+        additive.setNameAdditive(updatedAdditive.getNameAdditive());
+        additive.setPriceAdditive(updatedAdditive.getPriceAdditive());
+        session.merge(additive);
+        session.getTransaction().commit();
+    }
 
-            session.merge(updatedClient);
-            session.getTransaction().commit();
-            return updatedClient;
-        } finally {
-            if (session != null){
-                session.close();
-            }
-        }
+    public void updateMenu(long id, Menu updatedMenu) {
+        session = sessionFactory.openSession();
+        session.beginTransaction();
+        Menu menu = session.get(Menu.class, id);
+        menu.setDescriptionMenu(updatedMenu.getDescriptionMenu());
+        menu.setProduct(updatedMenu.getProduct());
+        session.merge(menu);
+        session.getTransaction().commit();
+    }
+
+    public void updateOrder(long id, Order updatedOrder) {
+        session = sessionFactory.openSession();
+        session.beginTransaction();
+        Order order = session.get(Order.class, id);
+        order.setData(updatedOrder.getData());
+        order.setProduct(updatedOrder.getProduct());
+        order.setClient(updatedOrder.getClient());
+        session.merge(order);
+        session.getTransaction().commit();
+    }
+
+    public void updateProduct(long id, Product updatedProduct) {
+        session = sessionFactory.openSession();
+        session.beginTransaction();
+        Product product = session.get(Product.class, id);
+        product.setNameProduct(updatedProduct.getNameProduct());
+        product.setPriceProduct(updatedProduct.getPriceProduct());
+        product.setDescriptionProduct(updatedProduct.getDescriptionProduct());
+        product.setAdditive(updatedProduct.getAdditive());
+        session.merge(product);
+        session.getTransaction().commit();
     }
 }
