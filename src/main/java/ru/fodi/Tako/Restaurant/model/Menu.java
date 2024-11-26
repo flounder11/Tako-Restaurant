@@ -3,6 +3,8 @@ package ru.fodi.Tako.Restaurant.model;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.Collection;
+
 @Entity
 @Data
 @Table(name = "menu", schema = "public", catalog = "Tako")

@@ -3,6 +3,7 @@ package ru.fodi.Tako.Restaurant.dal;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
 import ru.fodi.Tako.Restaurant.model.*;
 
@@ -267,4 +268,37 @@ public class DataAccessLayer {
         session.merge(product);
         session.getTransaction().commit();
     }
+
+    public String newUserToDatabase(User user) {
+        session = sessionFactory.openSession();
+        session.beginTransaction();
+        String name = user.getUserName();
+
+        Query query = session
+                .createQuery("FROM User where userName = :username")
+                .setParameter("username", name);
+        User userFrom = (User) query.uniqueResult();
+
+        if (userFrom != null) {
+            return "Выберите другое имя";
+        }
+        session.persist(user);
+        session.getTransaction().commit();
+        session.close();
+        return "Pabeda)";
+    }
+
+    public User getUserFromDatabaseByUsername(String name) {
+        session = sessionFactory.openSession();
+        session.getTransaction().begin();
+        Query query = session
+                .createQuery("FROM User where userName = :username")
+                .setParameter("username", name);
+        User userFrom = (User) query.uniqueResult();
+        if (userFrom == null) {
+            return null;
+        }
+        return userFrom;
+    }
+}
 }

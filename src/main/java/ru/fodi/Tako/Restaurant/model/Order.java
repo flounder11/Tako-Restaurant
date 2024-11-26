@@ -3,6 +3,8 @@ package ru.fodi.Tako.Restaurant.model;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.Collection;
+
 @Entity
 @Data
 @Table(name = "order", schema = "public", catalog = "Tako")
@@ -14,9 +16,9 @@ public class Order {
     @Column(name = "data")
     private String data;
 
-    @ManyToOne
+    @OneToMany
     @JoinColumn(name = "id_client")
-    private Client client;
+    private Collection<Client> client;
 
     @ManyToOne
     @JoinColumn(name = "id_product")
